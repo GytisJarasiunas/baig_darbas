@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1066</width>
+    <height>781</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Transporto valdymas</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QPushButton" name="prideti">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>560</y>
+      <width>221</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Pridėti</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>10</y>
+      <width>201</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Arial Black</family>
+      <pointsize>10</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>Reikalaujantys dėmesio</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>230</y>
+      <width>221</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Arial Black</family>
+      <pointsize>10</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>Visos Transporto priemonės</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="redaguoti_2">
+    <property name="geometry">
+     <rect>
+      <x>230</x>
+      <y>560</y>
+      <width>191</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Redaguoti</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="istrinti">
+    <property name="geometry">
+     <rect>
+      <x>830</x>
+      <y>560</y>
+      <width>221</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Ištrinti</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="redaguoti">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>170</y>
+      <width>1041</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Redaguoti</string>
+    </property>
+   </widget>
+   <widget class="QTableWidget" name="visi_auto">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>260</y>
+      <width>1041</width>
+      <height>291</height>
+     </rect>
+    </property>
+    <property name="tabletTracking">
+     <bool>false</bool>
+    </property>
+    <property name="autoFillBackground">
+     <bool>true</bool>
+    </property>
+    <property name="inputMethodHints">
+     <set>Qt::ImhNone</set>
+    </property>
+    <property name="lineWidth">
+     <number>2</number>
+    </property>
+    <property name="sizeAdjustPolicy">
+     <enum>QAbstractScrollArea::AdjustToContents</enum>
+    </property>
+    <property name="autoScrollMargin">
+     <number>16</number>
+    </property>
+    <property name="editTriggers">
+     <set>QAbstractItemView::NoEditTriggers</set>
+    </property>
+    <property name="showDropIndicator" stdset="0">
+     <bool>false</bool>
+    </property>
+    <property name="alternatingRowColors">
+     <bool>true</bool>
+    </property>
+    <property name="gridStyle">
+     <enum>Qt::DashDotDotLine</enum>
+    </property>
+    <property name="cornerButtonEnabled">
+     <bool>false</bool>
+    </property>
+    <attribute name="horizontalHeaderCascadingSectionResizes">
+     <bool>false</bool>
+    </attribute>
+    <attribute name="verticalHeaderMinimumSectionSize">
+     <number>35</number>
+    </attribute>
+    <attribute name="verticalHeaderStretchLastSection">
+     <bool>true</bool>
+    </attribute>
+    <column>
+     <property name="text">
+      <string> T.P. ID</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Valstyb. nr</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Tech. apžiura</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Kelių mokestis</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Priekaba</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Priek. Tech.</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Vair. Vardas</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Vair. Pavardė</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Markė</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Modelis</string>
+     </property>
+    </column>
+   </widget>
+   <widget class="QTableWidget" name="reik_dem">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>40</y>
+      <width>1041</width>
+      <height>121</height>
+     </rect>
+    </property>
+    <property name="tabletTracking">
+     <bool>false</bool>
+    </property>
+    <property name="autoFillBackground">
+     <bool>true</bool>
+    </property>
+    <property name="inputMethodHints">
+     <set>Qt::ImhNone</set>
+    </property>
+    <property name="lineWidth">
+     <number>2</number>
+    </property>
+    <property name="sizeAdjustPolicy">
+     <enum>QAbstractScrollArea::AdjustToContents</enum>
+    </property>
+    <property name="autoScrollMargin">
+     <number>16</number>
+    </property>
+    <property name="showDropIndicator" stdset="0">
+     <bool>false</bool>
+    </property>
+    <property name="alternatingRowColors">
+     <bool>true</bool>
+    </property>
+    <property name="gridStyle">
+     <enum>Qt::DashDotDotLine</enum>
+    </property>
+    <property name="cornerButtonEnabled">
+     <bool>false</bool>
+    </property>
+    <attribute name="horizontalHeaderCascadingSectionResizes">
+     <bool>false</bool>
+    </attribute>
+    <attribute name="verticalHeaderMinimumSectionSize">
+     <number>35</number>
+    </attribute>
+    <attribute name="verticalHeaderStretchLastSection">
+     <bool>true</bool>
+    </attribute>
+    <column>
+     <property name="text">
+      <string> T.P. ID</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Valstyb. nr</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Tech. apžiura</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Kelių mokestis</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Priekaba</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Priek. Tech.</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Vair. Vardas</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Vair. Pavardė</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Markė</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Modelis</string>
+     </property>
+    </column>
+   </widget>
+   <widget class="QPushButton" name="atnaujinti">
+    <property name="geometry">
+     <rect>
+      <x>830</x>
+      <y>210</y>
+      <width>221</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Atnaujinti lenteles</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1066</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuFailas">
+    <property name="title">
+     <string>Failas</string>
+    </property>
+    <addaction name="actionU_daryti"/>
+   </widget>
+   <addaction name="menuFailas"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionU_daryti">
+   <property name="text">
+    <string>Uždaryti</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
