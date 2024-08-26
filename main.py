@@ -13,24 +13,47 @@ from sqlalchemy.orm import sessionmaker
 class MainWindow(QtWidgets.QMainWindow):
     def __init__(self):
         super(MainWindow, self).__init__()
-        uic.loadUi("pagrindinis.ui", self)
+        uic.loadUi("pagrindinis_test.ui", self)
         self.show()
         self.prideti.clicked.connect(self.pridejimas)
-        self.redaguoti.clicked.connect(self.redagavimas)
+        self.redaguoti.clicked.connect(self.redagavimas_reik_demesio)
+        self.redaguoti_2.clicked.connect(self.redagavimas)
         self.load_data()
         self.atnaujinti.clicked.connect(self.load_data)
 
-    def redagavimas(self):
 
-        pasirinkimas = self.visi_auto.currentRow() + 1
-        if pasirinkimas:
-            self.dialog = EditSelection(pasirinkimas)
-        else:
+#dvi atskiros funkcijos atskiru langu reguliavimui
+    def redagavimas_reik_demesio(self):
+        try:
+            eile = self.reik_dem.currentItem().row()
+            tp_id = self.reik_dem.item(eile, 0).text()
+            print(tp_id)
+            self.dialog = EditSelection(tp_id)
+            return
+        except:
             msg = QMessageBox()
             msg.setIcon(QMessageBox.Critical)
             msg.setText("Klaida")
             msg.setInformativeText('Nepasirinkote irašo kurį redaguoti.'
-                                   '\nPirma pasirinkite iš lentelės, tada spauskite redaguoti')
+                                   '\nPirma pasirinkite iš reikia dėmesio lentelės, tada spauskite redaguoti')
+            msg.setWindowTitle("Klaida")
+            msg.exec_()
+
+
+#redaguoti visu tp irašus
+    def redagavimas(self):
+        try:
+            eile = self.visi_auto.currentItem().row()
+            tp_id = self.visi_auto.item(eile, 0).text()
+            print(tp_id)
+            self.dialog = EditSelection(tp_id)
+            return
+        except:
+            msg = QMessageBox()
+            msg.setIcon(QMessageBox.Critical)
+            msg.setText("Klaida")
+            msg.setInformativeText('Nepasirinkote irašo kurį redaguoti.'
+                                   '\nPirma pasirinkite iš Visu T.P. lentelės, tada spauskite redaguoti')
             msg.setWindowTitle("Klaida")
             msg.exec_()
 
@@ -41,7 +64,6 @@ class MainWindow(QtWidgets.QMainWindow):
         priekabos = session.query(Priekaba).all()
         reik_demesio =[]
         demesio_priekabos = []
-        print(tr_priemones)
 
         for irasas in tr_priemones:
             if (irasas.tech <= (datetime.now().date() + timedelta(days=30))
@@ -57,7 +79,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self.populate(self.visi_auto, tr_priemones)
         self.populate(self.reik_dem, reik_demesio)
-        print(reik_demesio)
+
 
 
 
@@ -67,7 +89,6 @@ class MainWindow(QtWidgets.QMainWindow):
         table.setRowCount(len(tr_priemones))
         tablerow = 0
         for row in tr_priemones:
-            print(row.id)
             table.setItem(tablerow, 0, QtWidgets.QTableWidgetItem(str(row.id)))
             table.setItem(tablerow, 1, QtWidgets.QTableWidgetItem(row.valstyb_nr))
             table.setItem(tablerow, 2, QtWidgets.QTableWidgetItem(str(row.tech)))
@@ -95,6 +116,14 @@ class MainWindow(QtWidgets.QMainWindow):
             table.setItem(tablerow, 9, QtWidgets.QTableWidgetItem(session.execute(
                 select(MarkeModelis.modelis).where(MarkeModelis.id == row.marke)).first()[0]))
             tablerow += 1
+
+    def populate_kuro_irasai(self, table):
+        Session = sessionmaker(bind=engine)
+        session = Session()
+        table.setRowCount(len(tr_priemones))
+        tablerow = 0
+        for row in tr_priemones:
+
 
 
 

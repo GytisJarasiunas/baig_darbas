@@ -2,8 +2,8 @@ from PyQt5 import QtCore, QtWidgets, uic
 from kuras import KuroIrasas, KuroIrasasEdit
 from transporto_priemone import TPIrasas, TPIrasasEdit
 from prid_marke import MarkModelIrasas, MarkModelEdit
-from prid_priekab import PriekabaIrasas
-from prid_vairuotoja import VairuotojoIrasas
+from prid_priekab import PriekabaIrasas, PriekabaEdit
+from prid_vairuotoja import VairuotojoIrasas, VairuotojasEdit
 
 
 # sukuriamas pasirinkimu langas
@@ -43,7 +43,6 @@ class EditSelection(QtWidgets.QDialog):
     def __init__(self, selection):
         super().__init__()
         self.select = selection
-        print(self.select)
         # užkraunamas ui failas
         uic.loadUi('pasirinkimai.ui', self)
         #pakeičiamas lango pavadinimas (kad nekurt naujo, ir nedidint projekto apimties)
@@ -51,8 +50,8 @@ class EditSelection(QtWidgets.QDialog):
         # sukuriami mygtuku rysiai
         self.add_kuras.clicked.connect(self.dialog_kuras)
         self.tp_iras.clicked.connect(self.dialog_tpirasas)
-        #self.priekaba.clicked.connect(self.dialog_priekaba)
-        # self.vair.clicked.connect(self.dialog_vairuotojas)
+        self.priekaba.clicked.connect(self.dialog_priekaba)
+        self.vair.clicked.connect(self.dialog_vairuotojas)
         self.marke.clicked.connect(self.dialog_marke)
         self.show()
 
@@ -67,12 +66,12 @@ class EditSelection(QtWidgets.QDialog):
     def dialog_marke(self):
         print(self.select)
         self.dialog = MarkModelEdit(self.select)
-    #
-    # def dialog_priekaba(self):
-    #     self.dialog = PriekabaIrasas()
-    #
-    # def dialog_vairuotojas(self):
-    #     self.dialog = VairuotojoIrasas
+
+    def dialog_priekaba(self):
+        self.dialog = PriekabaEdit(self.select)
+
+    def dialog_vairuotojas(self):
+        self.dialog = VairuotojasEdit(self.select)
 
 
 # jei kodas leidziamas tiesiogiai ivykdo kas yra po if, jei ne tai to nevykdo.

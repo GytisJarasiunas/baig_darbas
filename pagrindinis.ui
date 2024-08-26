@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1066</width>
-    <height>781</height>
+    <width>1062</width>
+    <height>772</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -144,6 +144,12 @@
     <property name="alternatingRowColors">
      <bool>true</bool>
     </property>
+    <property name="selectionMode">
+     <enum>QAbstractItemView::SingleSelection</enum>
+    </property>
+    <property name="selectionBehavior">
+     <enum>QAbstractItemView::SelectRows</enum>
+    </property>
     <property name="gridStyle">
      <enum>Qt::DashDotDotLine</enum>
     </property>
@@ -237,11 +243,20 @@
     <property name="autoScrollMargin">
      <number>16</number>
     </property>
+    <property name="editTriggers">
+     <set>QAbstractItemView::NoEditTriggers</set>
+    </property>
     <property name="showDropIndicator" stdset="0">
      <bool>false</bool>
     </property>
     <property name="alternatingRowColors">
      <bool>true</bool>
+    </property>
+    <property name="selectionMode">
+     <enum>QAbstractItemView::SingleSelection</enum>
+    </property>
+    <property name="selectionBehavior">
+     <enum>QAbstractItemView::SelectRows</enum>
     </property>
     <property name="gridStyle">
      <enum>Qt::DashDotDotLine</enum>
@@ -328,7 +343,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1066</width>
+     <width>1062</width>
      <height>22</height>
     </rect>
    </property>

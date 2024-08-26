@@ -146,7 +146,7 @@ class KuroIrasasEdit(QtWidgets.QDialog):
 
         pasirinkimas = self.sunk_pas.currentText()[:-10]
 
-        print(session.query(KurasIrasas.kiekis).where(KurasIrasas.id == pasirinkimas).first())
+
         self.kuro_kiekis.setText(
             str(session.query(KurasIrasas.kiekis).where(KurasIrasas.id == pasirinkimas).first()[0]))
         self.data.setDate(session.query(KurasIrasas.data).where(KurasIrasas.id == pasirinkimas).first()[0])

@@ -66,6 +66,6 @@ class MarkModelEdit(QtWidgets.QDialog):
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication([])
-    second = MarkModelEdit(2)
+    second = MarkModelEdit(1)
     app.exec()
 
