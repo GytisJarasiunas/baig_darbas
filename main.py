@@ -147,6 +147,11 @@ class MainWindow(QtWidgets.QMainWindow):
                         demesio_priekabos.append(irasas)
                 except TypeError:
                     pass
+        for x in demesio_priekabos:
+            t_p = session.query(TransportoPriemone).where(TransportoPriemone.priekaba_id == x.id).first()
+            reik_demesio.append(t_p)
+
+
         #siunciam uzklausa funkcijai paduodami dictus ir self.visi_auto(lenteles pavadinimas)
         self.populate(self.visi_auto, tr_priemones)
         self.populate(self.reik_dem, reik_demesio)
