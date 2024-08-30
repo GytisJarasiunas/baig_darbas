@@ -141,12 +141,19 @@ class MainWindow(QtWidgets.QMainWindow):
         for irasas in priekabos:
             if irasas.id == 0:
                 pass
-            else:
-                try:
-                    if irasas.tech <= datetime.now().date() + timedelta(days=30):
-                        demesio_priekabos.append(irasas)
-                except TypeError:
-                    pass
+            if irasas.tech <= datetime.now().date() + timedelta(days=30):
+                demesio_priekabos.append(irasas)
+
+
+        for priekaba in demesio_priekabos:
+           try:
+               x = session.query(TransportoPriemone).where(TransportoPriemone.priekaba_id == priekaba.id).all()[0]
+               reik_demesio.append(x)
+           except:
+               self.show_error_message(f'Priekaba {priekaba} nera priskirta jokiai transporto priemonei'
+                                       f'\nJos technine apžiura baigiasi: {priekaba.tech}')
+
+
         #siunciam uzklausa funkcijai paduodami dictus ir self.visi_auto(lenteles pavadinimas)
         self.populate(self.visi_auto, tr_priemones)
         self.populate(self.reik_dem, reik_demesio)
