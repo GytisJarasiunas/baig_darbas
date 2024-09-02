@@ -131,7 +131,11 @@ class MainWindow(QtWidgets.QMainWindow):
 
         for irasas in tr_priemones:
             if irasas.id == 0: #praleidziam index 0 tikrinima nes tai yra default irasas
-                pass
+                continue
+            if str(irasas.tech) == '2001-01-01':
+                continue
+            if str(irasas.keliu_mokestis) == '2001-01-01':
+                continue
             #patikrinam ar tech data patenka i bracketus, jei patenka ja appendinam i listus
             else:
                 if (irasas.tech <= (datetime.now().date() + timedelta(days=30))
@@ -140,8 +144,13 @@ class MainWindow(QtWidgets.QMainWindow):
 
         for irasas in priekabos:
             if irasas.id == 0:
-                pass
+                continue
+            #praleidziam jei tech yra pasibaigus 5m kad isvengt default itraukimo
+            if str(irasas.tech) == '2001-01-01':
+                continue
+
             if irasas.tech <= datetime.now().date() + timedelta(days=30):
+                print(irasas)
                 demesio_priekabos.append(irasas)
 
 
@@ -153,7 +162,7 @@ class MainWindow(QtWidgets.QMainWindow):
                self.show_error_message(f'Priekaba {priekaba} nera priskirta jokiai transporto priemonei'
                                        f'\nJos technine apžiura baigiasi: {priekaba.tech}')
 
-
+        print(reik_demesio)
         #siunciam uzklausa funkcijai paduodami dictus ir self.visi_auto(lenteles pavadinimas)
         self.populate(self.visi_auto, tr_priemones)
         self.populate(self.reik_dem, reik_demesio)
@@ -277,18 +286,18 @@ class MainWindow(QtWidgets.QMainWindow):
         self.dialog = VairuotojoIrasas()
 #cia tas pats bet su jomis dar kartu pasiduoda pasirinkimas, kuri editint
     def edit_kuras(self):
-        try:
+        # try:
             eile = self.kuro_irasai.currentItem().row()
             selection = self.kuro_irasai.item(eile, 0).text()
             self.dialog = KurasEditDirect(selection)
         #exceptas be TypeError ar pns nes PYQT daugeliu atveju neduoda eror o tiesiog uzsidaro su visiskai neaiskiu
         #process finish, ir jei irasius type error tada nepagauna jog ivyko klaida,
         # bandziau suzinot kas per kodas bet tokiu kodu nelabai yra
-        except:
-            #jei nepavyko ismetamas langelis su paaiskinimu
-            self.show_error_message('Nepasirinkote irašo kurį redaguoti.'
-                                    '\nPirma pasirinkite iš visu Kuro '
-                                    'įrašų lentelės, tada spauskite redaguoti.')
+        # except:
+        #     #jei nepavyko ismetamas langelis su paaiskinimu
+        #     self.show_error_message('Nepasirinkote irašo kurį redaguoti.'
+        #                             '\nPirma pasirinkite iš visu Kuro '
+        #                             'įrašų lentelės, tada spauskite redaguoti.')
 
     def edit_marke(self):
         try:

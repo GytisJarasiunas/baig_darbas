@@ -105,25 +105,25 @@ class PriekabaEdit(QtWidgets.QDialog):
             self.val_nr.setText(session.query(Priekaba.valstyb_nr).where(Priekaba.id == priekaba_id)
                             .first()[0])
         except TypeError:
-            pass
+            self.val_nr.setText('xx000')
 
         try:
             self.pavadinimas.setText(session.query(Priekaba.pavadinimas).where(Priekaba.id == priekaba_id)
                                 .first()[0])
         except TypeError:
-            pass
+            self.pavadinimas.setText('DEFAULT')
 
         try:
             self.pagam_data.setDate(session.query(Priekaba.pagam_metai).where(Priekaba.id == priekaba_id)
                                  .first()[0])
         except TypeError:
-            pass
+            self.pagam_data.setDate('2001-01-01')
 
         try:
             self.tech.setDate(session.query(Priekaba.tech).where(Priekaba.id == priekaba_id)
                                    .first()[0])
         except TypeError:
-            pass
+            self.tech.setDate('2001-01-01')
 
     def priekaba_save(self):
         #sukuriam sesija

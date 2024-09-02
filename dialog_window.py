@@ -25,6 +25,7 @@ class Selections(QtWidgets.QDialog):
         self.marke.clicked.connect(self.dialog_marke)
         self.show()
 
+
     # sukurtos funkcijos kurios vykdomos nuspaudus mygtuka
 
     def dialog_kuras(self):
@@ -41,6 +42,8 @@ class Selections(QtWidgets.QDialog):
 
     def dialog_vairuotojas(self):
         self.dialog = VairuotojoIrasas()
+
+
 
 
 class EditSelection(QtWidgets.QDialog):
@@ -82,5 +85,5 @@ class EditSelection(QtWidgets.QDialog):
 # jei kodas leidziamas tiesiogiai ivykdo kas yra po if, jei ne tai to nevykdo.
 if __name__ == "__main__":
     app = QtWidgets.QApplication([])
-    second = EditSelection(1)
+    second = Selections()
     app.exec()
