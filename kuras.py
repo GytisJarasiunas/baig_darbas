@@ -54,7 +54,8 @@ class KuroIrasas(QtWidgets.QDialog):
     def kuras_save(self):
         Session = sessionmaker(bind=engine)
         session = Session()
-        sunk = self.sunk_pas.currentIndex()
+        bandymas = self.sunk_pas.currentText().find('.')
+        sunk = self.sunk_pas.currentText()[:bandymas]
         kiek = float(self.kuro_kiekis.text())
         dat = self.data.date().toPyDate()
         kms = int(self.kilometrazas.text())
@@ -116,7 +117,8 @@ class KuroIrasasEdit(QtWidgets.QDialog):
     def kuras_save(self):
         Session = sessionmaker(bind=engine)
         session = Session()
-        sunk = self.sunk_pas.currentText()[:-10]
+        bandymas = self.sunk_pas.currentText().find('.')
+        sunk = self.sunk_pas.currentText()[:bandymas]
         kiek = float(self.kuro_kiekis.text())
         dat = self.data.date().toPyDate()
         kms = int(self.kilometrazas.text())
@@ -268,5 +270,5 @@ class KurasDelete(QtWidgets.QDialog):
 # jei kodas leidziamas tiesiogiai ivykdo kas yra po if, jei ne tai to nevykdo.
 if __name__ == "__main__":
     app = QtWidgets.QApplication([])
-    second = KurasEditDirect(4)
+    second = KuroIrasas()
     app.exec()

@@ -261,6 +261,6 @@ class PriekabaDelete(QtWidgets.QDialog):
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication([])
-    second = PriekabaDelete(7)
+    second = PriekabaIrasas()
     app.exec()
 

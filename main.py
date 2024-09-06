@@ -1,5 +1,6 @@
-from PyQt5 import QtWidgets
-from PyQt5 import uic
+import sys
+import os
+from PyQt5 import QtWidgets, uic, QtCore
 from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QMessageBox
 from sqlalchemy import select
@@ -14,14 +15,18 @@ from prid_vairuotoja import VairuotojoIrasas, VairuotojasDirectEdit, Vairuotojas
 from transporto_priemone import TPIrasas, TransportasDelete
 
 
-#sukuriamas main window
+
 class MainWindow(QtWidgets.QMainWindow):
     def __init__(self):
         super(MainWindow, self).__init__()
+        # QtWidgets.QApplication.setAttribute(QtCore.Qt.AA_EnableHighDpiScaling, True)  # enable highdpi scaling
+        # QtWidgets.QApplication.setAttribute(QtCore.Qt.AA_UseHighDpiPixmaps, True)
+        os.environ['QT_AUTO_SCREEN_SCALE_FACTOR'] = '1'
+        # sukuriamas main window
         #paleidžiam funkcija sukurt d-base ir ten irasyt default duomenis
         self.populate_initial_data()
         #loadinam user-interface faila
-        uic.loadUi('userinterfaces/pagrindinis.ui', self)
+        uic.loadUi('userinterfaces/pagrindinis_non_static.ui', self)
         #kairiame kampe pridedame icona
         app_icon = QIcon('resources/icon.png')
         self.setWindowIcon(app_icon)
@@ -49,6 +54,7 @@ class MainWindow(QtWidgets.QMainWindow):
         #i tablewidget langus uzkraunam duomenis
         self.load_data()
         self.populate_tab_2()
+
 
 
     #Funkcija kuri patikrina ar yra default irasai o jei ju nera tada juo sukuria
@@ -102,7 +108,7 @@ class MainWindow(QtWidgets.QMainWindow):
             print(tp_id)
             self.dialog = EditSelection(tp_id)
             return
-        except:
+        except AttributeError:
             self.show_error_message('Nepasirinkote irašo kurį redaguoti.'
                                    '\nPirma pasirinkite iš reikia dėmesio lentelės, tada spauskite redaguoti')
 
@@ -112,7 +118,7 @@ class MainWindow(QtWidgets.QMainWindow):
             eile = self.visi_auto.currentItem().row()
             tp_id = self.visi_auto.item(eile, 0).text()
             self.dialog = EditSelection(tp_id)
-        except:
+        except AttributeError:
             self.show_error_message('Nepasirinkote irašo kurį redaguoti.'
                                    '\nPirma pasirinkite iš Visu T.P. lentelės, tada spauskite redaguoti')
 
@@ -158,9 +164,11 @@ class MainWindow(QtWidgets.QMainWindow):
            try:
                x = session.query(TransportoPriemone).where(TransportoPriemone.priekaba_id == priekaba.id).all()[0]
                reik_demesio.append(x)
-           except:
-               self.show_error_message(f'Priekaba {priekaba} nera priskirta jokiai transporto priemonei'
+           except IndexError:
+               self.show_message(f'Priekaba {priekaba} nera priskirta jokiai transporto priemonei'
                                        f'\nJos technine apžiura baigiasi: {priekaba.tech}')
+           except Exception as e:
+               print(e)
 
         print(reik_demesio)
         #siunciam uzklausa funkcijai paduodami dictus ir self.visi_auto(lenteles pavadinimas)
@@ -286,25 +294,22 @@ class MainWindow(QtWidgets.QMainWindow):
         self.dialog = VairuotojoIrasas()
 #cia tas pats bet su jomis dar kartu pasiduoda pasirinkimas, kuri editint
     def edit_kuras(self):
-        # try:
+        try:
             eile = self.kuro_irasai.currentItem().row()
             selection = self.kuro_irasai.item(eile, 0).text()
             self.dialog = KurasEditDirect(selection)
-        #exceptas be TypeError ar pns nes PYQT daugeliu atveju neduoda eror o tiesiog uzsidaro su visiskai neaiskiu
-        #process finish, ir jei irasius type error tada nepagauna jog ivyko klaida,
-        # bandziau suzinot kas per kodas bet tokiu kodu nelabai yra
-        # except:
-        #     #jei nepavyko ismetamas langelis su paaiskinimu
-        #     self.show_error_message('Nepasirinkote irašo kurį redaguoti.'
-        #                             '\nPirma pasirinkite iš visu Kuro '
-        #                             'įrašų lentelės, tada spauskite redaguoti.')
+        except AttributeError:
+            #jei nepavyko ismetamas langelis su paaiskinimu
+            self.show_error_message('Nepasirinkote irašo kurį redaguoti.'
+                                    '\nPirma pasirinkite iš visu Kuro '
+                                    'įrašų lentelės, tada spauskite redaguoti.')
 
     def edit_marke(self):
         try:
             eile = self.markes_irasai.currentItem().row()
             selection = self.markes_irasai.item(eile, 0).text()
             self.dialog = MarkModelDirectEdit(selection)
-        except:
+        except AttributeError:
             self.show_error_message('Nepasirinkote irašo kurį redaguoti.'
                                     '\nPirma pasirinkite iš visu markės/modelio įrašų lentelės, '
                                     'tada spauskite redaguoti.')
@@ -315,7 +320,7 @@ class MainWindow(QtWidgets.QMainWindow):
             eile = self.priekabos_irasai.currentItem().row()
             selection = self.priekabos_irasai.item(eile, 0).text()
             self.dialog = PriekabaDirectEdit(selection)
-        except:
+        except AttributeError:
             self.show_error_message('Nepasirinkote irašo kurį redaguoti.'
                                     '\nPirma pasirinkite iš visu priekabos įrašų lentelės, tada spauskite redaguoti.')
 
@@ -333,7 +338,7 @@ class MainWindow(QtWidgets.QMainWindow):
             eile = self.visi_auto.currentItem().row()
             selection = self.visi_auto.item(eile, 0).text()
             self.dialog = TransportasDelete(selection)
-        except:
+        except AttributeError:
             self.show_error_message('Nepasirinkote irašo kurį redaguoti.'
                                     '\nPirma pasirinkite iš visu transporto priemonės įrašu lentelės,'
                                     ' tada spauskite ištrinti')
@@ -343,7 +348,7 @@ class MainWindow(QtWidgets.QMainWindow):
             eile = self.kuro_irasai.currentItem().row()
             selection = self.kuro_irasai.item(eile, 0).text()
             self.dialog = KurasDelete(selection)
-        except:
+        except AttributeError:
             self.show_error_message('Nepasirinkote irašo kurį redaguoti.'
                                     '\nPirma pasirinkite iš visu kuro įrašu lentelės, tada spauskite ištrinti')
 
@@ -352,7 +357,7 @@ class MainWindow(QtWidgets.QMainWindow):
             eile = self.markes_irasai.currentItem().row()
             selection = self.markes_irasai.item(eile, 0).text()
             self.dialog = MarkeDelete(selection)
-        except:
+        except AttributeError:
             self.show_error_message('Nepasirinkote irašo kurį redaguoti.'
                                     '\nPirma pasirinkite iš visu markės/modelio įrašu lentelės, '
                                     'tada spauskite ištrinti')
@@ -371,7 +376,7 @@ class MainWindow(QtWidgets.QMainWindow):
             eile = self.vair_irasai.currentItem().row()
             selection = self.vair_irasai.item(eile, 0).text()
             self.dialog = VairuotojasDelete(selection)
-        except:
+        except AttributeError:
             self.show_error_message('Nepasirinkote irašo kurį redaguoti.'
                                    '\nPirma pasirinkite iš visu vairuotojo įrašu lentelės, tada spauskite ištrinti')
 
@@ -383,6 +388,14 @@ class MainWindow(QtWidgets.QMainWindow):
         msg.setText('Klaida')
         msg.setInformativeText(message)
         msg.setWindowTitle('Klaida')
+        msg.exec_()
+
+    def show_message(self, message):
+        msg = QMessageBox()
+        msg.setIcon(QMessageBox.Information)
+        msg.setText('Ispėjimas')
+        msg.setInformativeText(message)
+        msg.setWindowTitle('Ispėjimas')
         msg.exec_()
 
 

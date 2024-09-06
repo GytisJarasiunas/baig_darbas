@@ -77,7 +77,7 @@
        <rect>
         <x>10</x>
         <y>20</y>
-        <width>201</width>
+        <width>991</width>
         <height>31</height>
        </rect>
       </property>
@@ -102,7 +102,7 @@
      <widget class="QTableWidget" name="reik_dem">
       <property name="geometry">
        <rect>
-        <x>0</x>
+        <x>-10</x>
         <y>60</y>
         <width>1041</width>
         <height>161</height>
@@ -236,7 +236,7 @@
       <property name="geometry">
        <rect>
         <x>0</x>
-        <y>280</y>
+        <y>290</y>
         <width>1021</width>
         <height>31</height>
        </rect>
@@ -262,7 +262,7 @@
        <rect>
         <x>10</x>
         <y>320</y>
-        <width>221</width>
+        <width>1011</width>
         <height>31</height>
        </rect>
       </property>
@@ -545,7 +545,7 @@
        <rect>
         <x>0</x>
         <y>20</y>
-        <width>221</width>
+        <width>581</width>
         <height>31</height>
        </rect>
       </property>
@@ -612,7 +612,7 @@
        <rect>
         <x>620</x>
         <y>30</y>
-        <width>221</width>
+        <width>381</width>
         <height>31</height>
        </rect>
       </property>
@@ -711,7 +711,7 @@
        <rect>
         <x>0</x>
         <y>310</y>
-        <width>221</width>
+        <width>761</width>
         <height>31</height>
        </rect>
       </property>
@@ -954,7 +954,7 @@
        <rect>
         <x>0</x>
         <y>540</y>
-        <width>221</width>
+        <width>611</width>
         <height>31</height>
        </rect>
       </property>
